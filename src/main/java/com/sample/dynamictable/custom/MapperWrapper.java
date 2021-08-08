@@ -3,17 +3,22 @@ package com.sample.dynamictable.custom;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+@Component
+@Scope("prototype")
 public class MapperWrapper<T> implements BaseMapper<T> {
 
     private final BaseMapper<T> delegate;
     private final Integer tableSeq;
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     public MapperWrapper(BaseMapper<T> delegate, Integer tableSeq) {
         this.delegate = delegate;
         this.tableSeq = tableSeq;
